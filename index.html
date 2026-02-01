@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RektProof — Blockchain Security Audits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafaf9;
+            --bg-alt: #f5f5f4;
+            --text: #1c1917;
+            --text-secondary: #57534e;
+            --text-muted: #a8a29e;
+            --accent: #dc2626;
+            --accent-light: #fef2f2;
+            --border: #e7e5e4;
+            --border-dark: #d6d3d1;
+            --font-serif: 'Crimson Pro', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            background: var(--text);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--text);
+            opacity: 1;
+        }
+
+        .nav-cta {
+            background: var(--text);
+            color: var(--bg) !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.85 !important;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0 5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 500;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .hero-intro {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-intro strong {
+            color: var(--text);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            gap: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.25rem;
+        }
+
+        .expertise-list {
+            list-style: none;
+        }
+
+        .expertise-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .expertise-list li:last-child {
+            border-bottom: none;
+        }
+
+        .expertise-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .expertise-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .expertise-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Audit Table */
+        .audit-section {
+            background: var(--bg);
+        }
+
+        .audit-group {
+            margin-bottom: 3rem;
+        }
+
+        .audit-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .audit-group-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--text);
+        }
+
+        .audit-list {
+            list-style: none;
+        }
+
+        .audit-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: 2rem;
+            align-items: center;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .audit-item:hover {
+            background: var(--bg-alt);
+            margin: 0 -1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .audit-name {
+            font-weight: 600;
+        }
+
+        .audit-name span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .audit-chain {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            background: var(--bg-alt);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .audit-findings {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .finding {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        .finding-c { background: #fef2f2; color: #dc2626; }
+        .finding-h { background: #fff7ed; color: #ea580c; }
+        .finding-m { background: #fefce8; color: #ca8a04; }
+        .finding-l { background: #f0fdf4; color: #16a34a; }
+
+        .audit-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-dark);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            background: var(--bg-alt);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--text);
+            color: var(--bg);
+            border-bottom: none;
+        }
+
+        .contact-section .section-label {
+            color: var(--text-muted);
+        }
+
+        .contact-section .section-title {
+            color: var(--bg);
+        }
+
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .contact-text {
+            max-width: 450px;
+            color: var(--border);
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--text-muted);
+            border-radius: 8px;
+            color: var(--bg);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            background: var(--bg);
+            color: var(--text);
+            border-color: var(--bg);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            background: var(--text);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 4rem 0 3rem;
+            }
+
+            .stats-row {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .stat {
+                min-width: 120px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .audit-item {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .contact-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <div class="logo-mark">RP</div>
+                RektProof
+            </a>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#audits">Audits</a>
+                <a href="#services">Services</a>
+                <a href="#contact" class="nav-cta">Get in Touch</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Available for Audits</div>
+            <h1>We find the bugs before they find your TVL.</h1>
+            <p class="hero-intro">
+                <strong>RektProof</strong> is a blockchain security firm specializing in smart contract audits across <strong>Move</strong>, <strong>Solidity</strong>, and <strong>Rust</strong> ecosystems. We've secured protocols on Sui, Aptos, Ethereum, and beyond.
+            </p>
+            
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="stat-value">30+</span>
+                    <span class="stat-label">Protocols Audited</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">$50M+</span>
+                    <span class="stat-label">Value Secured</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">150+</span>
+                    <span class="stat-label">Bugs Found</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15+</span>
+                    <span class="stat-label">Critical/High</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">About</div>
+                <h2 class="section-title">What we do</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        We're security researchers with deep expertise in DeFi protocols, L1 blockchain frameworks, and cross-chain systems. Our audits combine manual code review with formal verification techniques to uncover vulnerabilities that automated tools miss.
+                    </p>
+                    <p>
+                        From lending protocols and DEXs to consensus mechanisms and bridge contracts — we've audited them all. Our reports are thorough, actionable, and delivered on time.
+                    </p>
+                </div>
+                
+                <ul class="expertise-list">
+                    <li>
+                        <span class="expertise-icon">🌊</span>
+                        <div class="expertise-info">
+                            <h4>Move (Sui & Aptos)</h4>
+                            <p>Deep expertise in Move's resource model and security patterns</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="expertise-icon">⟠</span>
+                        <div class="expertise-info">
+                            <h4>Solidity / EVM</h4>
+                            <p>Ethereum, L2s, and EVM-compatible chains</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="expertise-icon">◎</span>
+                        <div class="expertise-info">
+                            <h4>Rust / Solana</h4>
+                            <p>Solana programs and Rust-based infrastructure</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="expertise-icon">🔗</span>
+                        <div class="expertise-info">
+                            <h4>Cross-chain & Bridges</h4>
+                            <p>Bridge protocols and cross-chain messaging</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="audits" class="audit-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Portfolio</div>
+                <h2 class="section-title">Audit History</h2>
+            </div>
+            
+            <div class="audit-group">
+                <div class="audit-group-title">Move Ecosystem</div>
+                <ul class="audit-list">
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            DeepBook
+                            <span>Margin Trading System / CLOB</span>
+                        </div>
+                        <span class="audit-chain">Sui</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-h">~450</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            Joule Core
+                            <span>Lending Protocol</span>
+                        </div>
+                        <span class="audit-chain">Aptos</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-h">H</span>
+                            <span class="finding finding-m">M</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            ve_mmt
+                            <span>Vote-Escrowed Token Protocol</span>
+                        </div>
+                        <span class="audit-chain">Sui</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-m">M</span>
+                            <span class="finding finding-l">L</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            TokenMinter
+                            <span>Token Creation Platform</span>
+                        </div>
+                        <span class="audit-chain">Sui</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-m">M</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="audit-group">
+                <div class="audit-group-title">EVM / Solidity</div>
+                <ul class="audit-list">
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            TaskManagerUpgradeable
+                            <span>Bitcoin Bridge Contracts</span>
+                        </div>
+                        <span class="audit-chain">EVM</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-h">H</span>
+                            <span class="finding finding-m">M</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            MawariVesting
+                            <span>Vesting Schedule Contracts</span>
+                        </div>
+                        <span class="audit-chain">EVM</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-m">M</span>
+                            <span class="finding finding-l">L</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="audit-group">
+                <div class="audit-group-title">L1 & Infrastructure</div>
+                <ul class="audit-list">
+                    <li class="audit-item">
+                        <div class="audit-name">
+                            Supra
+                            <span>Blockchain Framework / SMR Moonshot Consensus</span>
+                        </div>
+                        <span class="audit-chain">L1</span>
+                        <div class="audit-findings">
+                            <span class="finding finding-c">C</span>
+                            <span class="finding finding-h">H</span>
+                        </div>
+                        <a href="#" class="audit-link">Report →</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Services</div>
+                <h2 class="section-title">How we can help</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Smart Contract Audits</h3>
+                    <p>Comprehensive security review of your protocol's codebase with detailed findings and remediation guidance.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">DeFi</span>
+                        <span class="service-tag">Lending</span>
+                        <span class="service-tag">DEX</span>
+                        <span class="service-tag">NFT</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h3>L1 / Infrastructure Audits</h3>
+                    <p>Deep security analysis of blockchain frameworks, consensus mechanisms, and core infrastructure.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Consensus</span>
+                        <span class="service-tag">Validators</span>
+                        <span class="service-tag">VM</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h3>Bridge & Cross-chain</h3>
+                    <p>Security assessment of bridge protocols, cross-chain messaging, and interoperability solutions.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Bridges</span>
+                        <span class="service-tag">Messaging</span>
+                        <span class="service-tag">Relayers</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h3>Security Consulting</h3>
+                    <p>Ongoing security guidance, architecture review, and threat modeling for your team.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Architecture</span>
+                        <span class="service-tag">Threat Model</span>
+                        <span class="service-tag">Best Practices</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Contact</div>
+                <h2 class="section-title">Let's secure your protocol</h2>
+            </div>
+            
+            <div class="contact-content">
+                <p class="contact-text">
+                    Ready to get your protocol audited? Reach out and we'll get back to you within 24 hours with a quote and timeline.
+                </p>
+                <div class="contact-links">
+                    <a href="https://twitter.com/" class="contact-link" target="_blank">
+                        𝕏 Twitter
+                    </a>
+                    <a href="https://t.me/" class="contact-link" target="_blank">
+                        ✈ Telegram
+                    </a>
+                    <a href="mailto:hello@rektproof.com" class="contact-link">
+                        ✉ Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 RektProof Private Limited</p>
+        </div>
+    </footer>
+</body>
+</html>
