@@ -45,7 +45,6 @@
             overflow-x: hidden;
         }
 
-        /* Ambient background */
         .ambient {
             position: fixed;
             top: 0;
@@ -77,7 +76,6 @@
             66% { transform: translate(-1%, 2%) rotate(-1deg); }
         }
 
-        /* Grain overlay */
         .grain {
             position: fixed;
             top: 0;
@@ -159,7 +157,7 @@
 
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
         }
 
@@ -250,7 +248,6 @@
             margin-bottom: 4rem;
         }
 
-        /* Stats */
         .stats {
             display: flex;
             gap: 4rem;
@@ -383,91 +380,152 @@
             border-bottom: 1px solid var(--border-light);
         }
 
-        .audit-list {
-            list-style: none;
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .audit-item {
-            display: grid;
-            grid-template-columns: 1fr auto auto auto;
-            gap: 2rem;
-            align-items: center;
-            padding: 1.25rem 1.5rem;
-            margin: 0 -1.5rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+        .audit-table th {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .audit-item:hover {
+        .audit-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .audit-table tr:hover td {
             background: var(--bg-card);
         }
 
-        .audit-name {
+        .audit-table .project {
             font-weight: 600;
-            font-size: 1rem;
         }
 
-        .audit-name span {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
+        .audit-table .protocol {
+            color: var(--text-secondary);
         }
 
-        .audit-chain {
+        .chain-badge {
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
             background: var(--bg-elevated);
             color: var(--text-secondary);
             border: 1px solid var(--border);
         }
 
-        .audit-findings {
-            display: flex;
-            gap: 0.4rem;
+        .provider-badge {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .report-link {
+            font-size: 0.8rem;
         }
 
         .finding {
             font-family: var(--font-mono);
             font-size: 0.65rem;
             font-weight: 600;
-            padding: 0.3rem 0.55rem;
+            padding: 0.25rem 0.5rem;
             border-radius: 4px;
+            margin-right: 0.25rem;
         }
 
-        .finding-c { 
-            background: rgba(255, 100, 100, 0.15); 
-            color: #ff6b6b; 
-            border: 1px solid rgba(255, 100, 100, 0.2);
-        }
-        .finding-h { 
-            background: rgba(255, 180, 100, 0.15); 
-            color: #ffb86c; 
-            border: 1px solid rgba(255, 180, 100, 0.2);
-        }
-        .finding-m { 
-            background: rgba(255, 230, 100, 0.15); 
-            color: #f1fa8c; 
-            border: 1px solid rgba(255, 230, 100, 0.2);
-        }
-        .finding-l { 
-            background: rgba(100, 255, 180, 0.15); 
-            color: #50fa7b; 
-            border: 1px solid rgba(100, 255, 180, 0.2);
+        .finding-c { background: rgba(255, 100, 100, 0.15); color: #ff6b6b; border: 1px solid rgba(255, 100, 100, 0.2); }
+        .finding-h { background: rgba(255, 180, 100, 0.15); color: #ffb86c; border: 1px solid rgba(255, 180, 100, 0.2); }
+        .finding-m { background: rgba(255, 230, 100, 0.15); color: #f1fa8c; border: 1px solid rgba(255, 230, 100, 0.2); }
+        .finding-l { background: rgba(100, 255, 180, 0.15); color: #50fa7b; border: 1px solid rgba(100, 255, 180, 0.2); }
+        .finding-i { background: rgba(100, 180, 255, 0.15); color: #8be9fd; border: 1px solid rgba(100, 180, 255, 0.2); }
+
+        /* Contests & Bounties */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
         }
 
-        .audit-link {
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .mini-table th {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mini-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
             font-size: 0.85rem;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        .audit-item:hover .audit-link {
-            opacity: 1;
+        .mini-table tr:hover td {
+            background: var(--bg-card);
+        }
+
+        .subsection-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Open Source */
+        .oss-list {
+            list-style: none;
+        }
+
+        .oss-item {
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .oss-item:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card);
+        }
+
+        .oss-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .oss-item code {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            background: var(--bg-elevated);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            color: var(--accent);
+        }
+
+        .oss-item a {
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 0.5rem;
+            word-break: break-all;
         }
 
         /* Services */
@@ -611,23 +669,13 @@
                 gap: 2rem;
             }
 
-            .stat {
-                min-width: 120px;
-            }
-
             .about-grid {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
 
-            .audit-item {
+            .two-col-grid {
                 grid-template-columns: 1fr;
-                gap: 0.75rem;
-                padding: 1.25rem;
-            }
-
-            .audit-link {
-                opacity: 1;
             }
 
             .services-grid {
@@ -647,9 +695,13 @@
                 margin: 0 -1.5rem;
                 padding: 5rem 1.5rem;
             }
+
+            .audit-table {
+                display: block;
+                overflow-x: auto;
+            }
         }
 
-        /* Smooth fade in */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -678,6 +730,7 @@
             <nav>
                 <a href="#about">About</a>
                 <a href="#portfolio">Portfolio</a>
+                <a href="#contests">Contests</a>
                 <a href="#services">Services</a>
                 <a href="#contact" class="nav-cta">Get in Touch</a>
             </nav>
@@ -695,25 +748,25 @@
                 <h1>We find the bugs before they find <em>your TVL</em></h1>
                 
                 <p class="hero-sub">
-                    Blockchain security firm specializing in smart contract audits across Move, Solidity, and Rust ecosystems. Securing protocols on Sui, Aptos, Ethereum, and beyond.
+                    Blockchain security firm specializing in smart contract audits across Move, Solidity, and Rust ecosystems. Securing protocols on Sui, Aptos, Ethereum, Solana, and beyond.
                 </p>
                 
                 <div class="stats">
                     <div class="stat">
-                        <div class="stat-value">30+</div>
+                        <div class="stat-value">50+</div>
                         <div class="stat-label">Protocols Audited</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">$50M+</div>
-                        <div class="stat-label">Value Secured</div>
+                        <div class="stat-value">30+</div>
+                        <div class="stat-label">Contest Participations</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">150+</div>
-                        <div class="stat-label">Bugs Found</div>
+                        <div class="stat-value">25+</div>
+                        <div class="stat-label">High Severity Bugs</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">15+</div>
-                        <div class="stat-label">Critical/High</div>
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Bug Bounties</div>
                     </div>
                 </div>
             </div>
@@ -733,7 +786,7 @@
                         We're security researchers with deep expertise in DeFi protocols, L1 blockchain frameworks, and cross-chain systems. Our audits combine rigorous manual code review with formal verification techniques to uncover vulnerabilities that automated tools miss.
                     </p>
                     <p>
-                        From lending protocols and DEXs to consensus mechanisms and bridge contracts — we've audited them all. Our reports are thorough, actionable, and delivered on time.
+                        From lending protocols and DEXs to consensus mechanisms and bridge contracts — we've audited them all. Previously conducted audits as a member of Ottersec. Our reports are thorough, actionable, and delivered on time.
                     </p>
                 </div>
                 
@@ -760,10 +813,10 @@
                         </div>
                     </li>
                     <li class="expertise-item">
-                        <div class="expertise-icon">🔗</div>
+                        <div class="expertise-icon">📱</div>
                         <div class="expertise-info">
-                            <h4>Cross-chain & Bridges</h4>
-                            <p>Bridge protocols & messaging layers</p>
+                            <h4>Wallet & Mobile</h4>
+                            <p>React Native, Flutter, Web Extensions</p>
                         </div>
                     </li>
                 </ul>
@@ -778,105 +831,533 @@
                 <h2 class="section-title">Audit History</h2>
             </div>
             
+            <!-- Move Audits -->
             <div class="audit-group">
                 <div class="audit-group-title">Move Ecosystem</div>
-                <ul class="audit-list">
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            DeepBook
-                            <span>Margin Trading System / CLOB</span>
-                        </div>
-                        <span class="audit-chain">Sui</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-h">~450</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            Joule Core
-                            <span>Lending Protocol</span>
-                        </div>
-                        <span class="audit-chain">Aptos</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-h">H</span>
-                            <span class="finding finding-m">M</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            ve_mmt
-                            <span>Vote-Escrowed Token Protocol</span>
-                        </div>
-                        <span class="audit-chain">Sui</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-m">M</span>
-                            <span class="finding finding-l">L</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            TokenMinter
-                            <span>Token Creation Platform</span>
-                        </div>
-                        <span class="audit-chain">Sui</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-m">M</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                </ul>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Timeline</th>
+                            <th>Protocol</th>
+                            <th>Report</th>
+                            <th>Provider</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="project">Joule Finance</td>
+                            <td>Dec 2025</td>
+                            <td class="protocol">DeFi</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Sherlock</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Momentum</td>
+                            <td>Oct 2025</td>
+                            <td class="protocol">Governance</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Sherlock</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Deepbook V3</td>
+                            <td>Oct 2025</td>
+                            <td class="protocol">Margin Pool</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">3 Sigma</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Panana Predictions</td>
+                            <td>Jul 2025</td>
+                            <td class="protocol">Prediction Market</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Sherlock</td>
+                        </tr>
+                        <tr>
+                            <td class="project">FullSail</td>
+                            <td>Jun 2025</td>
+                            <td class="protocol">Governance</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Plainshift</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Echo Oracle</td>
+                            <td>May 2025</td>
+                            <td class="protocol">Oracle</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Cyfrin</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Alkimi</td>
+                            <td>May 2025</td>
+                            <td class="protocol">Token Contract</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Supra</td>
+                            <td>Apr 2025</td>
+                            <td class="protocol">L1 Chain</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">-</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Citadel</td>
+                            <td>May 2025</td>
+                            <td class="protocol">Vault</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">-</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Kofi</td>
+                            <td>Mar 2025</td>
+                            <td class="protocol">Liquid Staking</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Zenith</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Swarm</td>
+                            <td>Jan 2025</td>
+                            <td class="protocol">License Sale</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">IOTA</td>
+                            <td>Nov 2024</td>
+                            <td class="protocol">IOTA L1 Chain</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Sherlock</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Chingari</td>
+                            <td>Aug 2024</td>
+                            <td class="protocol">Staking Protocol</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Securr</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            
+
+            <!-- Solidity Audits -->
             <div class="audit-group">
-                <div class="audit-group-title">EVM / Solidity</div>
-                <ul class="audit-list">
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            TaskManagerUpgradeable
-                            <span>Bitcoin Bridge Contracts</span>
-                        </div>
-                        <span class="audit-chain">EVM</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-h">H</span>
-                            <span class="finding finding-m">M</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            MawariVesting
-                            <span>Vesting Schedule Contracts</span>
-                        </div>
-                        <span class="audit-chain">EVM</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-m">M</span>
-                            <span class="finding finding-l">L</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                </ul>
+                <div class="audit-group-title">Solidity / EVM</div>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Timeline</th>
+                            <th>Protocol</th>
+                            <th>Report</th>
+                            <th>Provider</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="project">Town Square</td>
+                            <td>Jan 2026</td>
+                            <td class="protocol">DeFi</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Sherlock</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Hyper Nova</td>
+                            <td>Jan 2026</td>
+                            <td class="protocol">Bridge</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">-</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Berafarm</td>
+                            <td>Jun 2025</td>
+                            <td class="protocol">DeFi</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">-</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Arbera</td>
+                            <td>May 2025</td>
+                            <td class="protocol">LST</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Sub7 Security</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Risk Vault</td>
+                            <td>Apr 2025</td>
+                            <td class="protocol">Yield</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Pixl</td>
+                            <td>Apr 2025</td>
+                            <td class="protocol">Staking</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">0xbow</td>
+                            <td>Feb 2025</td>
+                            <td class="protocol">ZK Privacy Pool</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Auditware</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Reactive Network</td>
+                            <td>Feb 2025</td>
+                            <td class="protocol">Bridge</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Beracana</td>
+                            <td>Feb 2025</td>
+                            <td class="protocol">DeFi</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Sub7 Security</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Social Grow AI</td>
+                            <td>Feb 2025</td>
+                            <td class="protocol">Meme Launcher</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Amplifi</td>
+                            <td>Jan 2025</td>
+                            <td class="protocol">DeFi</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Sub7 Security</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Blever</td>
+                            <td>Jan 2025</td>
+                            <td class="protocol">NFT Launchpad</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Sub7 Security</td>
+                        </tr>
+                        <tr>
+                            <td class="project">WirePay (Wpay)</td>
+                            <td>May 2024</td>
+                            <td class="protocol">DeFi</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Sub7 Security</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            
+
+            <!-- Rust Audits -->
             <div class="audit-group">
-                <div class="audit-group-title">L1 & Infrastructure</div>
-                <ul class="audit-list">
-                    <li class="audit-item">
-                        <div class="audit-name">
-                            Supra
-                            <span>Blockchain Framework / SMR Moonshot Consensus</span>
-                        </div>
-                        <span class="audit-chain">L1</span>
-                        <div class="audit-findings">
-                            <span class="finding finding-c">C</span>
-                            <span class="finding finding-h">H</span>
-                        </div>
-                        <a href="#" class="audit-link">View Report →</a>
-                    </li>
-                </ul>
+                <div class="audit-group-title">Rust / Solana</div>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Timeline</th>
+                            <th>Protocol</th>
+                            <th>Report</th>
+                            <th>Provider</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="project">Car Coin</td>
+                            <td>May 2025</td>
+                            <td class="protocol">Sale Contract</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Conduct</td>
+                            <td>Mar 2025</td>
+                            <td class="protocol">Bitcoin L2 Chain</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Auditware</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Levels</td>
+                            <td>Jan 2025</td>
+                            <td class="protocol">Token Launchpad</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">QuillAudits</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Rarible</td>
+                            <td>Jan 2025</td>
+                            <td class="protocol">NFT Marketplace</td>
+                            <td>Soon</td>
+                            <td class="provider-badge">Auditware</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Chingari</td>
+                            <td>Aug 2024</td>
+                            <td class="protocol">Swap Bot</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                            <td class="provider-badge">Securr</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <!-- Wallet Audits -->
+            <div class="audit-group">
+                <div class="audit-group-title">Wallet Audits</div>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Timeline</th>
+                            <th>Language</th>
+                            <th>Protocol</th>
+                            <th>Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="project">Supra Mobile Wallet</td>
+                            <td>Dec 2024</td>
+                            <td>React Native</td>
+                            <td class="protocol">Mobile App</td>
+                            <td>Soon</td>
+                        </tr>
+                        <tr>
+                            <td class="project">Supra Wallet Extension</td>
+                            <td>Dec 2024</td>
+                            <td>React Native</td>
+                            <td class="protocol">Web Extension</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Ottersec Audits -->
+            <div class="audit-group">
+                <div class="audit-group-title">Audits @Ottersec</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Audits conducted as a member of Ottersec</p>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Timeline</th>
+                            <th>Language</th>
+                            <th>Protocol</th>
+                            <th>Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="project">Layerzero</td>
+                            <td>Aug-Sep 2022</td>
+                            <td>Move</td>
+                            <td class="protocol">Bridge</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                        <tr>
+                            <td class="project">Econia Labs</td>
+                            <td>Nov-Dec 2022</td>
+                            <td>Move</td>
+                            <td class="protocol">Order Book</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                        <tr>
+                            <td class="project">Laminar Markets</td>
+                            <td>Sep-Oct 2022</td>
+                            <td>Move</td>
+                            <td class="protocol">Order Book</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                        <tr>
+                            <td class="project">Switchboard</td>
+                            <td>Oct-Nov 2022</td>
+                            <td>Move</td>
+                            <td class="protocol">Oracle</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                        <tr>
+                            <td class="project">Pontem Mobile Wallet</td>
+                            <td>Jan-Feb 2023</td>
+                            <td>React Native</td>
+                            <td class="protocol">Wallet</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                        <tr>
+                            <td class="project">Qoin Pay</td>
+                            <td>Feb 2023</td>
+                            <td>Flutter</td>
+                            <td class="protocol">Wallet</td>
+                            <td><a href="#" class="report-link">Link</a></td>
+                        </tr>
+                        <tr>
+                            <td class="project">Solana Mobile Wallet</td>
+                            <td>Feb 2023</td>
+                            <td>React Native</td>
+                            <td class="protocol">Wallet</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contests & Bug Bounties -->
+    <section id="contests">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Achievements</div>
+                <h2 class="section-title">Bug Bounties & Contests</h2>
+            </div>
+
+            <div class="two-col-grid">
+                <!-- Bug Bounties -->
+                <div>
+                    <h3 class="subsection-title">Bug Bounties</h3>
+                    <table class="mini-table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Severity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="project">Aptos Core</td>
+                                <td><span class="finding finding-m">Medium</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Public Disclosure Denied</td>
+                                <td><span class="finding finding-m">Medium</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Carbon</td>
+                                <td><span class="finding finding-l">Low</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Aptos Core</td>
+                                <td><span class="finding finding-i">Info</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Contests (Top findings) -->
+                <div>
+                    <h3 class="subsection-title">Contest Highlights</h3>
+                    <table class="mini-table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Platform</th>
+                                <th>Findings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="project">Velocimeter</td>
+                                <td>Sherlock</td>
+                                <td><span class="finding finding-h">4H</span><span class="finding finding-m">1M</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">SuperPosition</td>
+                                <td>Code4rena</td>
+                                <td><span class="finding finding-h">3H</span><span class="finding finding-m">1M</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Zerolend</td>
+                                <td>Cantina</td>
+                                <td><span class="finding finding-h">2H</span><span class="finding finding-m">5M</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Opal</td>
+                                <td>Cantina</td>
+                                <td><span class="finding finding-h">2H</span><span class="finding finding-m">4M</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">$Ape Launchpad 🥇</td>
+                                <td>Secure3</td>
+                                <td><span class="finding finding-h">1H</span><span class="finding finding-m">4M</span><span class="finding finding-l">3L</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Allo V2</td>
+                                <td>Sherlock</td>
+                                <td><span class="finding finding-h">1H</span><span class="finding finding-m">5M</span></td>
+                            </tr>
+                            <tr>
+                                <td class="project">Curves</td>
+                                <td>Code4rena</td>
+                                <td><span class="finding finding-h">1H</span><span class="finding finding-m">2M</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Full Contests List -->
+            <div style="margin-top: 3rem;">
+                <h3 class="subsection-title">All Contest Participations</h3>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Platform</th>
+                            <th>Findings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="project">$Ape Launchpad 🥇</td><td>Secure3</td><td><span class="finding finding-h">1H</span><span class="finding finding-m">4M</span><span class="finding finding-l">3L</span></td></tr>
+                        <tr><td class="project">Rova 🥈</td><td>Sherlock</td><td><span class="finding finding-m">1M</span></td></tr>
+                        <tr><td class="project">EthosX Operp 🥈</td><td>Secure3</td><td><span class="finding finding-h">1H</span><span class="finding finding-m">1M</span><span class="finding finding-l">3L</span></td></tr>
+                        <tr><td class="project">zkLink bridge 🥉</td><td>Secure3</td><td><span class="finding finding-m">1M (Solo)</span></td></tr>
+                        <tr><td class="project">Lagrange 🥉</td><td>Secure3</td><td><span class="finding finding-m">1M (Solo)</span><span class="finding finding-l">2L</span></td></tr>
+                        <tr><td class="project">zklink MergeToken 🥉</td><td>Secure3</td><td><span class="finding finding-m">1M</span><span class="finding finding-l">2L</span></td></tr>
+                        <tr><td class="project">Velocimeter</td><td>Sherlock</td><td><span class="finding finding-h">4H</span><span class="finding finding-m">1M</span></td></tr>
+                        <tr><td class="project">SuperPosition</td><td>Code4rena</td><td><span class="finding finding-h">3H</span><span class="finding finding-m">1M</span></td></tr>
+                        <tr><td class="project">Zerolend</td><td>Cantina</td><td><span class="finding finding-h">2H</span><span class="finding finding-m">5M</span></td></tr>
+                        <tr><td class="project">Opal</td><td>Cantina</td><td><span class="finding finding-h">2H</span><span class="finding finding-m">4M</span></td></tr>
+                        <tr><td class="project">Allo V2</td><td>Sherlock</td><td><span class="finding finding-h">1H</span><span class="finding finding-m">5M</span></td></tr>
+                        <tr><td class="project">Curves</td><td>Code4rena</td><td><span class="finding finding-h">1H</span><span class="finding finding-m">2M</span></td></tr>
+                        <tr><td class="project">Decent</td><td>Code4rena</td><td><span class="finding finding-h">1H</span></td></tr>
+                        <tr><td class="project">Dopex</td><td>Code4rena</td><td><span class="finding finding-h">1H</span> QA Report</td></tr>
+                        <tr><td class="project">Tokemak</td><td>Sherlock</td><td><span class="finding finding-h">1H</span></td></tr>
+                        <tr><td class="project">Curvance</td><td>Cantina</td><td><span class="finding finding-h">1H</span></td></tr>
+                        <tr><td class="project">BeedleFi</td><td>CodeHawks</td><td><span class="finding finding-h">1H</span><span class="finding finding-l">1L</span></td></tr>
+                        <tr><td class="project">Foundry DeFi Stablecoin</td><td>CodeHawks</td><td><span class="finding finding-m">1M</span></td></tr>
+                        <tr><td class="project">FBTC</td><td>Secure3</td><td><span class="finding finding-l">1L</span></td></tr>
+                        <tr><td class="project">Vaultsig</td><td>Code4rena</td><td><span class="finding finding-h">1H</span><span class="finding finding-m">1M</span></td></tr>
+                        <tr><td class="project">Basin</td><td>Code4rena</td><td><span class="finding finding-h">1H</span></td></tr>
+                        <tr><td class="project">Avantis</td><td>Sherlock</td><td><span class="finding finding-h">1H</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Source Contributions -->
+    <section style="background: var(--bg-surface); margin: 0 -2.5rem; padding: 7rem 2.5rem;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Open Source</div>
+                <h2 class="section-title">Contributions</h2>
+            </div>
+
+            <ul class="oss-list">
+                <li class="oss-item">
+                    <h4>[Move] Broken Prover Spec Bugfix</h4>
+                    <a href="https://github.com/aptos-labs/aptos-core/pull/7442" target="_blank">github.com/aptos-labs/aptos-core/pull/7442</a>
+                </li>
+                <li class="oss-item">
+                    <h4>[Move] Formal verification rules for <code>smart_table</code></h4>
+                    <a href="https://github.com/aptos-labs/aptos-core/pull/7493" target="_blank">github.com/aptos-labs/aptos-core/pull/7493</a>
+                </li>
+                <li class="oss-item">
+                    <h4>[Move] Formal Verification rules for <code>big_vector</code> and <code>smart_vector</code> modules</h4>
+                    <a href="https://github.com/aptos-labs/aptos-core/pull/7209/commits/d2a0aa9378a3809ffe7477a571f68d3db9b5b7c1" target="_blank">github.com/aptos-labs/aptos-core/pull/7209</a>
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -908,12 +1389,12 @@
                     </div>
                 </div>
                 <div class="service-card">
-                    <h3>Bridge & Cross-chain</h3>
-                    <p>Security assessment of bridge protocols, cross-chain messaging, and interoperability solutions.</p>
+                    <h3>Wallet & Mobile Security</h3>
+                    <p>Security assessment of mobile wallets, browser extensions, and wallet infrastructure.</p>
                     <div class="service-tags">
-                        <span class="service-tag">Bridges</span>
-                        <span class="service-tag">Messaging</span>
-                        <span class="service-tag">Relayers</span>
+                        <span class="service-tag">React Native</span>
+                        <span class="service-tag">Flutter</span>
+                        <span class="service-tag">Extensions</span>
                     </div>
                 </div>
                 <div class="service-card">
