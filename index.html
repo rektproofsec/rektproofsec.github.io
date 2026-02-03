@@ -6,7 +6,7 @@
     <title>REKTPROOF — Blockchain Security Audits</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #0c0c10;
@@ -23,8 +23,9 @@
             --border: rgba(255, 255, 255, 0.06);
             --border-light: rgba(255, 255, 255, 0.1);
             --font-serif: 'Instrument Serif', Georgia, serif;
-            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-sans: 'Poppins', -apple-system, sans-serif;
             --font-mono: 'IBM Plex Mono', monospace;
+            --font-logo: 'Pacifico', cursive;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,9 +46,24 @@
         header { padding: 1rem 0; position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(12, 12, 16, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Logo - using actual image */
-        .logo { display: flex; align-items: center; text-decoration: none; }
-        .logo-img { height: 36px; width: auto; }
+        /* Logo Styles */
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.6rem;
+            text-decoration: none; 
+        }
+        .logo-text {
+            font-family: var(--font-logo);
+            font-size: 1.6rem;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
         
         nav { display: flex; gap: 2rem; align-items: center; }
         nav a { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
@@ -62,7 +78,7 @@
         @keyframes glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         .hero h1 { font-family: var(--font-serif); font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
         .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-sub { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; }
+        .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; font-weight: 400; }
 
         .featured-protocols { margin-bottom: 3rem; }
         .featured-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
@@ -86,7 +102,7 @@
 
         .about-section { background: var(--bg-surface); margin: 0 -2.5rem; padding: 5rem 2.5rem; }
         .about-intro { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; margin-bottom: 4rem; }
-        .about-text { font-size: 1.1rem; color: var(--text-secondary); }
+        .about-text { font-size: 1.05rem; color: var(--text-secondary); font-weight: 400; }
         .about-text p { margin-bottom: 1.5rem; }
         .expertise-list { list-style: none; margin-top: -40px;}
         .expertise-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
@@ -94,7 +110,7 @@
         .expertise-item:last-child { border-bottom: none; }
         .expertise-icon { font-size: 1.1rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.2); border-radius: 8px; flex-shrink: 0; }
         .expertise-info h4 { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.15rem; }
-        .expertise-info p { font-size: 0.8rem; color: var(--text-muted); }
+        .expertise-info p { font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
 
         .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         .service-card { padding: 1.75rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; transition: all 0.4s ease; position: relative; overflow: hidden; }
@@ -103,14 +119,13 @@
         .service-card:hover::before { opacity: 1; }
         .service-icon { font-size: 1.5rem; margin-bottom: 1rem; }
         .service-card h3 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .service-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+        .service-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
 
         .portfolio-section { padding: 5rem 0; }
         .audit-group { margin-bottom: 3rem; }
         .audit-group:last-child { margin-bottom: 0; }
         .audit-group-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-light); }
 
-        /* FIXED: Audit List with proper alignment */
         .audit-list { list-style: none; }
         .audit-item { 
             display: grid; 
@@ -146,18 +161,8 @@
         .chain-l1 { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); }
         .chain-mobile { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); }
         
-        .audit-provider { 
-            font-size: 0.8rem; 
-            color: var(--text-muted); 
-            text-align: center;
-        }
-        .audit-report { 
-            font-size: 0.8rem; 
-            font-weight: 500; 
-            opacity: 0; 
-            transition: opacity 0.3s ease; 
-            text-align: right;
-        }
+        .audit-provider { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+        .audit-report { font-size: 0.8rem; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; text-align: right; }
         .audit-report.always-visible { opacity: 0.5; }
 
         .contests-section { background: var(--bg-surface); margin: 0 -2.5rem; padding: 5rem 2.5rem; }
@@ -186,7 +191,7 @@
 
         .contact-section { background: var(--bg-surface); margin: 0 -2.5rem; padding: 5rem 2.5rem; text-align: center; }
         .contact-section .section-title { font-size: clamp(2rem, 5vw, 2.75rem); margin-bottom: 1rem; }
-        .contact-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2.5rem; }
+        .contact-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2.5rem; font-weight: 400; }
         .contact-links { display: flex; justify-content: center; gap: 1rem; }
         .contact-link { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 1.75rem; border: 1px solid var(--border-light); border-radius: 10px; color: var(--text); font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease; }
         .contact-link:hover { background: var(--accent); color: var(--bg-deep); border-color: var(--accent); }
@@ -214,7 +219,8 @@
             .contact-links { flex-direction: column; align-items: stretch; }
             .contact-link { justify-content: center; }
             .about-section, .contests-section, .contact-section { margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
-            .logo-img { height: 28px; }
+            .logo-text { font-size: 1.35rem; }
+            .logo-icon { width: 26px; height: 26px; }
 
             /* Mobile Audit Cards */
             .audit-item {
@@ -253,8 +259,12 @@
     <header>
         <div class="container header-inner">
             <a href="#" class="logo">
-                <!-- Use actual logo image - upload logo-horizontal.png to your repo -->
-                <img src="logo-horizontal.png" alt="RektProof" class="logo-img">
+                <span class="logo-text">RektProof</span>
+                <!-- Shield with checkmark icon -->
+                <svg class="logo-icon" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 2L28 6.5V16C28 24.5 22.5 31 16 34C9.5 31 4 24.5 4 16V6.5L16 2Z" stroke="#a78bfa" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+                    <path d="M10 18L14 22L22 14" stroke="#a78bfa" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </a>
             <nav>
                 <a href="#about">About</a>
