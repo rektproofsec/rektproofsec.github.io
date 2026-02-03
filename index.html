@@ -141,7 +141,6 @@
             transition: all 0.3s ease; 
         }
         .audit-item:hover { background: var(--bg-card); }
-        .audit-item:hover .audit-report { opacity: 1; }
         
         .audit-name { font-weight: 600; font-size: 0.95rem; }
         .audit-name span { display: block; font-size: 0.8rem; font-weight: 400; color: var(--text-muted); margin-top: 0.2rem; }
@@ -166,7 +165,7 @@
         
         .audit-provider { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
         .audit-report { 
-            opacity: 0; 
+            opacity: 1; 
             transition: all 0.3s ease; 
             text-align: right;
             display: flex;
@@ -182,10 +181,17 @@
         }
         .audit-report:hover svg {
             stroke: var(--accent-light);
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
-        .audit-report.always-visible { opacity: 0.4; }
-        .audit-report.always-visible svg { stroke: var(--text-muted); }
+        .audit-report.always-visible { 
+            opacity: 1;
+        }
+        .audit-report.always-visible svg { 
+            stroke: #4a4a5a;
+        }
+        .audit-report.always-visible:hover svg {
+            stroke: #6a6a7a;
+        }
 
         .contests-section { background: var(--bg-surface); margin: 0 -2.5rem; padding: 5rem 2.5rem; }
         .two-col-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; }
