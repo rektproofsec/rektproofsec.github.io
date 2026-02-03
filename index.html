@@ -16,7 +16,6 @@
             --text: #f0f0f5;
             --text-secondary: #9090a0;
             --text-muted: #5a5a6e;
-            /* Updated to purple theme matching logo */
             --accent: #a78bfa;
             --accent-light: #c4b5fd;
             --accent-warm: #a78bfa;
@@ -46,9 +45,9 @@
         header { padding: 1rem 0; position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(12, 12, 16, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Logo Styles */
+        /* Logo - using actual image */
         .logo { display: flex; align-items: center; text-decoration: none; }
-        .logo-img { height: 40px; width: auto; }
+        .logo-img { height: 36px; width: auto; }
         
         nav { display: flex; gap: 2rem; align-items: center; }
         nav a { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
@@ -89,7 +88,7 @@
         .about-intro { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; margin-bottom: 4rem; }
         .about-text { font-size: 1.1rem; color: var(--text-secondary); }
         .about-text p { margin-bottom: 1.5rem; }
-        .expertise-list { list-style: none; }
+        .expertise-list { list-style: none; margin-top: -40px;}
         .expertise-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
         .expertise-item:hover { padding-left: 0.5rem; border-color: var(--accent); }
         .expertise-item:last-child { border-bottom: none; }
@@ -111,21 +110,54 @@
         .audit-group:last-child { margin-bottom: 0; }
         .audit-group-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-light); }
 
+        /* FIXED: Audit List with proper alignment */
         .audit-list { list-style: none; }
-        .audit-item { display: grid; grid-template-columns: 1fr auto auto auto; gap: 1.5rem; align-items: center; padding: 0.7rem 1.25rem; margin: 0 -1.25rem; border-radius: 10px; transition: all 0.3s ease; }
+        .audit-item { 
+            display: grid; 
+            grid-template-columns: 1fr 80px 120px 100px; 
+            gap: 1rem; 
+            align-items: center; 
+            padding: 0.85rem 1.25rem; 
+            margin: 0 -1.25rem; 
+            border-radius: 10px; 
+            transition: all 0.3s ease; 
+        }
         .audit-item:hover { background: var(--bg-card); }
         .audit-item:hover .audit-report { opacity: 1; }
+        
         .audit-name { font-weight: 600; font-size: 0.95rem; }
         .audit-name span { display: block; font-size: 0.8rem; font-weight: 400; color: var(--text-muted); margin-top: 0.2rem; }
-        .audit-chain { font-family: var(--font-mono); font-size: 0.65rem; padding: 0.35rem 0.7rem; border-radius: 5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .audit-chain { 
+            font-family: var(--font-mono); 
+            font-size: 0.65rem; 
+            padding: 0.35rem 0.7rem; 
+            border-radius: 5px; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            text-align: center;
+            justify-self: center;
+        }
         .chain-sui { background: rgba(108, 210, 237, 0.15); color: #6CD2ED; border: 1px solid rgba(108, 210, 237, 0.25); }
         .chain-aptos { background: rgba(0, 191, 165, 0.15); color: #00BFA5; border: 1px solid rgba(0, 191, 165, 0.25); }
         .chain-evm { background: rgba(98, 126, 234, 0.15); color: #627EEA; border: 1px solid rgba(98, 126, 234, 0.25); }
         .chain-solana { background: rgba(153, 69, 255, 0.15); color: #9945FF; border: 1px solid rgba(153, 69, 255, 0.25); }
         .chain-l1 { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); }
         .chain-mobile { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); }
-        .audit-provider { font-size: 0.8rem; color: var(--text-muted); min-width: 100px; text-align: right; }
-        .audit-report { font-size: 0.8rem; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; min-width: 80px; text-align: right; }
+        
+        .audit-provider { 
+            font-size: 0.8rem; 
+            color: var(--text-muted); 
+            text-align: center;
+        }
+        .audit-report { 
+            font-size: 0.8rem; 
+            font-weight: 500; 
+            opacity: 0; 
+            transition: opacity 0.3s ease; 
+            text-align: right;
+        }
         .audit-report.always-visible { opacity: 0.5; }
 
         .contests-section { background: var(--bg-surface); margin: 0 -2.5rem; padding: 5rem 2.5rem; }
@@ -167,6 +199,7 @@
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .oss-grid { grid-template-columns: repeat(2, 1fr); }
+            .audit-item { grid-template-columns: 1fr 70px 100px 90px; gap: 0.75rem; }
         }
 
         @media (max-width: 900px) {
@@ -181,7 +214,7 @@
             .contact-links { flex-direction: column; align-items: stretch; }
             .contact-link { justify-content: center; }
             .about-section, .contests-section, .contact-section { margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
-            .logo-img { height: 32px; }
+            .logo-img { height: 28px; }
 
             /* Mobile Audit Cards */
             .audit-item {
@@ -198,9 +231,9 @@
             .audit-item:hover { background: var(--bg-elevated); border-color: var(--accent); }
             .audit-name { grid-column: 1 / 2; grid-row: 1 / 2; font-size: 1rem; }
             .audit-name span { font-size: 0.8rem; margin-top: 0.2rem; color: var(--text-secondary); }
-            .audit-chain { grid-column: 2 / 3; grid-row: 1 / 2; align-self: start; font-size: 0.6rem; padding: 0.3rem 0.6rem; }
-            .audit-provider { grid-column: 1 / 2; grid-row: 2 / 3; text-align: left; font-size: 0.8rem; color: var(--text-muted); min-width: auto; }
-            .audit-report { grid-column: 2 / 3; grid-row: 2 / 3; opacity: 1; text-align: right; font-size: 0.8rem; min-width: auto; }
+            .audit-chain { grid-column: 2 / 3; grid-row: 1 / 2; align-self: start; font-size: 0.6rem; padding: 0.3rem 0.6rem; justify-self: end; }
+            .audit-provider { grid-column: 1 / 2; grid-row: 2 / 3; text-align: left; font-size: 0.8rem; color: var(--text-muted); }
+            .audit-report { grid-column: 2 / 3; grid-row: 2 / 3; opacity: 1; text-align: right; font-size: 0.8rem; }
             .audit-report.always-visible { opacity: 0.5; }
         }
 
@@ -220,12 +253,8 @@
     <header>
         <div class="container header-inner">
             <a href="#" class="logo">
-                <!-- SVG recreation of logo for crisp rendering -->
-                <svg class="logo-img" viewBox="0 0 200 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="35" font-family="'Brush Script MT', cursive" font-size="38" fill="#a78bfa" font-style="italic">RektProof</text>
-                    <path d="M175 8 L185 8 L185 18 L195 18 L195 28 L185 28 L185 38 L175 38 L175 28 L165 28 L165 18 L175 18 Z" stroke="#a78bfa" stroke-width="2" fill="none"/>
-                    <path d="M172 22 L178 28 L188 18" stroke="#a78bfa" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <!-- Use actual logo image - upload logo-horizontal.png to your repo -->
+                <img src="logo-horizontal.png" alt="RektProof" class="logo-img">
             </a>
             <nav>
                 <a href="#about">About</a>
